@@ -1,0 +1,11 @@
+package com.wgc.green.manager;
+
+import java.util.List;
+
+public class RequestIotConfig {
+	
+	public static List<Long> getSensorIDListBy(int id) {
+		return null;
+	}
+
+}

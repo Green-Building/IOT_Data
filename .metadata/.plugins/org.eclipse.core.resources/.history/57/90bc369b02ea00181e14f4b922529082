@@ -1,0 +1,5 @@
+package com.wgc.green.manager;
+
+public class RequestIotConfig {
+
+}

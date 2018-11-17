@@ -1,0 +1,19 @@
+package com.wgc.green.repository;
+
+import java.util.*;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
+import com.wgc.green.entity.SensorData;
+
+@Component
+@Repository
+public interface SensorDataRepository extends MongoRepository<SensorData, String> {
+
+	public static List<SensorData> findBySensorIdAndTime(long sensorId, Date startTime, Date endTime) {
+		Query query = new Query();
+		query.
+	}
+}

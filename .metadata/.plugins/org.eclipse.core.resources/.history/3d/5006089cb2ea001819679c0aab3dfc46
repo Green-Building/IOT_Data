@@ -1,0 +1,12 @@
+package com.wgc.green;
+
+import java.util.Date;
+
+public class Test {
+	
+	public static void main(String[] a) {
+		  System.out.println(new Date().toString());
+
+	}
+
+}

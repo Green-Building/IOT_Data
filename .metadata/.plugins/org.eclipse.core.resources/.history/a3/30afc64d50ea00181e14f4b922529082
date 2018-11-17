@@ -1,0 +1,119 @@
+package com.wgc.green.entity;
+
+import java.util.Date;
+import java.sql.Timestamp;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.IndexDirection;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+
+@Document(collection = "senseor_data")
+public class SensorData {
+	@Id
+	private String id;
+	@Indexed(direction = IndexDirection.ASCENDING)    // @Indexed(unique = true)
+    private long sensorId;
+//	@Transient
+//  private long node_id;		   
+//  private long cluster_id;	
+    private String unit;
+    
+    @Field("Model")
+    @JsonProperty("model")
+    private String model;
+    private String seriesNum;
+    private String data;
+	@Indexed(direction = IndexDirection.ASCENDING)
+    private String type;
+	@Indexed(direction = IndexDirection.ASCENDING)
+    private Date date;
+
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public long getSensor_id() {
+		return sensorId;
+	}
+
+	public void setSensor_id(long sensorId) {
+		this.sensorId = sensorId;
+	}
+
+	
+//	public long getNode_id() {
+//		return node_id;
+//	}
+//
+//	public void setNode_id(long node_id) {
+//		this.node_id = node_id;
+//	}
+//
+//	public long getCluster_id() {
+//		return cluster_id;
+//	}
+//
+//	public void setCluster_id(long cluster_id) {
+//		this.cluster_id = cluster_id;
+//	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public String getSeriesNum() {
+		return seriesNum;
+	}
+
+	public void setSeriesNum(String seriesNum) {
+		this.seriesNum = seriesNum;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getSensordata() {
+		return data;
+	}
+
+	public void setSensordata(String data) {
+		this.data = data;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+		
+}

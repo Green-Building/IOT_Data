@@ -1,0 +1,66 @@
+package com.wgc.green.entity;
+
+import java.sql.Timestamp;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "senseor_data")
+public class SensorData {
+	@Id
+	private int sensorDataID;
+	private int sensorID;
+	private String data;
+	private String timestamp;	
+	private String name;
+	private String unit;
+	
+	
+	public int getSensorDataID() {
+		return sensorDataID;
+	}
+
+	public void setSensorDataID(int sensorDataID) {
+		this.sensorDataID = sensorDataID;
+	}
+
+	public int getSensorID() {
+		return sensorID;
+	}
+
+	public void setSensorID(int sensorID) {
+		this.sensorID = sensorID;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
+	public String getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+		
+}

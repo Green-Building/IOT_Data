@@ -1,0 +1,13 @@
+package com.wgc.green.repository;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
+import com.wgc.green.entity.SensorData;
+
+@Component
+@Repository
+public interface SensorDataRepository extends MongoRepository<SensorData, String> {
+
+}

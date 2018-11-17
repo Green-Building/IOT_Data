@@ -1,0 +1,21 @@
+package com.wgc.green.manager;
+
+import java.util.List;
+
+public class SensorDataManager {
+	private SensorDataRepository sensorDataRepository;
+	
+	public SensorDataManager(SensorDataRepository sensorDataRepository) {
+		this.sensorDataRepository = sensorDataRepository;
+	}
+	
+	public static List<SensorData> getSensorDataByIDList(List<Long> sensorIDList) {
+		List<SensorData> = new LinkedList<>();
+		if(sensorIDList == null)
+
+		for(Long l : sensorIDList) {
+			this.
+		}
+	}
+
+}

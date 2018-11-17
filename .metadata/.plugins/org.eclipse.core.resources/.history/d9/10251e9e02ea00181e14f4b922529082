@@ -1,0 +1,9 @@
+package com.wgc.green.manager;
+
+public class RequestIotConfig {
+	
+	public static List<Long> getSensorIDListBy() {
+		
+	}
+
+}
