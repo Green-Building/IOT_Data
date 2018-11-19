@@ -107,33 +107,40 @@ public class SensorDataController {
 	}
 	
 	@CrossOrigin(origins = "*")
-	@PostMapping("/testpost")
+	@PostMapping("/testadd")
 	public void addSensorDataTest() {
 		List<SensorData> sensorDataList = new LinkedList<>();
 		SensorData sd1 = new SensorData();
 		sd1.setDate(new Date("Sat Nov 17 00:00:00 PST 2018"));
-		sd1.setData("data1");
+		sd1.setData(123.0);
 		sd1.setSensorId(1);
-		sd1.setNodeId(2);
-		sd1.setClusterId(3);
+//		sd1.setNodeId(2);
+//		sd1.setClusterId(3);
 		
 		SensorData sd2 = new SensorData();
 		sd2.setDate(new Date("Sat Nov 17 00:00:01 PST 2018"));
 		sd2.setSensorId(1);
-		sd2.setNodeId(2);
-		sd2.setClusterId(3);
-		sd2.setData("data2");
+		sd2.setData(321.0);
+//		sd2.setNodeId(2);
+//		sd2.setClusterId(3);
 		
 		
 		SensorData sd3 = new SensorData();
 		sd3.setDate(new Date("Sat Nov 17 00:00:02 PST 2018"));
 		sd3.setSensorId(2);
-		sd3.setNodeId(3);
-		sd3.setClusterId(3);
+//		sd3.setNodeId(3);
+//		sd3.setClusterId(3);
 		sensorDataList.add(sd1);
 		sensorDataList.add(sd2);
 		sensorDataList.add(sd3);
 		sdManager.addSensorData(sensorDataList);
+	}
+	
+
+	@CrossOrigin(origins = "*")
+	@GetMapping("/testrestcall")
+	public List<SensorData> getSensorDataToTestIotConifgCall() {
+		return sdManager.testIotConifgCall();
 	}
 	
 }

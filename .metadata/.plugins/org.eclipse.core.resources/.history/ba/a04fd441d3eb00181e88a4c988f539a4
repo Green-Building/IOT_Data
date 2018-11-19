@@ -1,0 +1,45 @@
+package com.wgc.green.entity;
+
+import java.util.Date;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.IndexDirection;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+
+@Document(collection = "senseor_data")
+public class SensorData {
+	@Id
+	private String id;
+	@Indexed(direction = IndexDirection.ASCENDING)    // @Indexed(unique = true)
+    private long sensorId;
+//	@Transient	
+//  @Field("Model")
+//  @JsonProperty("unit")
+    private String unit;
+    private String model;
+    private String seriesNum;
+    private Double data;
+	@Indexed(direction = IndexDirection.ASCENDING) 
+    private String type;
+	@Indexed(direction = IndexDirection.ASCENDING)
+    private Date date;
+	
+//	@Indexed(direction = IndexDirection.ASCENDING)
+//	private long nodeId;		   
+//	@Indexed(direction = IndexDirection.ASCENDING)
+//	private long clusterId;
+//	@Indexed(direction = IndexDirection.ASCENDING)
+//	private long roomId;		   
+//	@Indexed(direction = IndexDirection.ASCENDING)
+//	private long floorId;
+//	private long buildingId;		   
+
+	
+		
+}

@@ -17,7 +17,6 @@ import com.wgc.green.entity.SensorData;
 @Repository
 public interface SensorDataRepository extends MongoRepository<SensorData, String> {
 
-	@Autowired
 	MongoTemplate mongoTemplate = new MongoTemplate( new MongoClient(), "sensor_data_DB");
 
 	public default List<SensorData> findBySensorIdAndTime(long sensorId, Date startTime, Date endTime) {
@@ -26,17 +25,17 @@ public interface SensorDataRepository extends MongoRepository<SensorData, String
 		return mongoTemplate.find(query, SensorData.class);
 	}
 
-	public default List<SensorData> findByNodeIdAndTime(long nodeId, Date startTime, Date endTime) {
-		Query query = new Query();
-		query.addCriteria(Criteria.where("nodeId").is(nodeId).and("date").lte(endTime).gte(startTime));
-		return mongoTemplate.find(query, SensorData.class);
-	}
-
-	public default List<SensorData> findByClusterIdAndTime(long clusterId, Date startTime, Date endTime) {
-		Query query = new Query();
-		query.addCriteria(Criteria.where("clusterId").is(clusterId).and("date").lte(endTime).gte(startTime));
-		return mongoTemplate.find(query, SensorData.class);
-	}
+//	public default List<SensorData> findByNodeIdAndTime(long nodeId, Date startTime, Date endTime) {
+//		Query query = new Query();
+//		query.addCriteria(Criteria.where("nodeId").is(nodeId).and("date").lte(endTime).gte(startTime));
+//		return mongoTemplate.find(query, SensorData.class);
+//	}
+//
+//	public default List<SensorData> findByClusterIdAndTime(long clusterId, Date startTime, Date endTime) {
+//		Query query = new Query();
+//		query.addCriteria(Criteria.where("clusterId").is(clusterId).and("date").lte(endTime).gte(startTime));
+//		return mongoTemplate.find(query, SensorData.class);
+//	}
 	
 	
 }

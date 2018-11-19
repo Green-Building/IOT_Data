@@ -24,126 +24,71 @@ public class SensorData {
     private String unit;
     private String model;
     private String seriesNum;
-    private String data;
+    private Double data;
 	@Indexed(direction = IndexDirection.ASCENDING) 
     private String type;
 	@Indexed(direction = IndexDirection.ASCENDING)
     private Date date;
 	
-	@Indexed(direction = IndexDirection.ASCENDING)
-	private long nodeId;		   
-	@Indexed(direction = IndexDirection.ASCENDING)
-	private long clusterId;
-	@Indexed(direction = IndexDirection.ASCENDING)
-	private long roomId;		   
-	@Indexed(direction = IndexDirection.ASCENDING)
-	private long floorId;
-	private long buildingId;		   
-
 	
-	public long getSensorId() {
-		return sensorId;
-	}
-
-	public void setSensorId(long sensorId) {
-		this.sensorId = sensorId;
-	}
-
-	public String getData() {
-		return data;
-	}
-
-	public void setData(String data) {
-		this.data = data;
-	}
-
+//	@Indexed(direction = IndexDirection.ASCENDING)
+//	private long nodeId;		   
+//	@Indexed(direction = IndexDirection.ASCENDING)
+//	private long clusterId;
+//	@Indexed(direction = IndexDirection.ASCENDING)
+//	private long roomId;		   
+//	@Indexed(direction = IndexDirection.ASCENDING)
+//	private long floorId;
+//	private long buildingId;		
+	
+	
 	public String getId() {
 		return id;
 	}
-
 	public void setId(String id) {
 		this.id = id;
 	}
-
-	public String getModel() {
-		return model;
+	public long getSensorId() {
+		return sensorId;
 	}
-
-	public void setModel(String model) {
-		this.model = model;
+	public void setSensorId(long sensorId) {
+		this.sensorId = sensorId;
 	}
-
-	public String getSeriesNum() {
-		return seriesNum;
-	}
-
-	public void setSeriesNum(String seriesNum) {
-		this.seriesNum = seriesNum;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-	
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
 	public String getUnit() {
 		return unit;
 	}
-
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
-
-	
-	public long getNodeId() {
-		return nodeId;
+	public String getModel() {
+		return model;
 	}
-
-	public void setNodeId(long nodeId) {
-		this.nodeId = nodeId;
+	public void setModel(String model) {
+		this.model = model;
 	}
-
-	public long getClusterId() {
-		return clusterId;
+	public String getSeriesNum() {
+		return seriesNum;
 	}
-
-	public void setClusterId(long clusterId) {
-		this.clusterId = clusterId;
+	public void setSeriesNum(String seriesNum) {
+		this.seriesNum = seriesNum;
 	}
-
-	public long getRoomId() {
-		return roomId;
+	public Double getData() {
+		return data;
 	}
-
-	public void setRoomId(long roomId) {
-		this.roomId = roomId;
+	public void setData(Double data) {
+		this.data = data;
 	}
-
-	public long getFloorId() {
-		return floorId;
+	public String getType() {
+		return type;
 	}
-
-	public void setFloorId(long floorId) {
-		this.floorId = floorId;
+	public void setType(String type) {
+		this.type = type;
 	}
-
-	public long getBuildingId() {
-		return buildingId;
+	public Date getDate() {
+		return date;
 	}
-
-	public void setBuildingId(long buildingId) {
-		this.buildingId = buildingId;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 		
 }

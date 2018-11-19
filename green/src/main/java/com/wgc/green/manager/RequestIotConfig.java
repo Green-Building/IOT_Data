@@ -2,6 +2,9 @@ package com.wgc.green.manager;
 
 import java.util.List;
 
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -10,22 +13,52 @@ import com.wgc.green.entity.SensorData;
 @Component
 public class RequestIotConfig {
     RestTemplate restTemplate = new RestTemplate();
+    private final String IOT_CONFIG_SEVER_IP = "127.0.0.1";
+    private final String PORT = "8080";
      
-	public List<Long> getSensorIDListBy(int id) {
-		final String uri = "http://localhost:8080/ IOT Config /room.json";
-	    String result = this.restTemplate.getForObject(uri, String.class);
-
-	    System.out.println(result);
-		return null;
-	}
-	
-	
-	public List<SensorData> getSensorList() {
-		final String uri = "http://localhost:8080/sensor_data/room.json";
-//		SensorData result = this.restTemplate.getForEntity(url, responseType, uriVariables)  .getForObject(uri, SensorData.class);
-//
-//	    System.out.println(result);
+	public List<Long> getSensorIDListBy(long id) {
+//		final String uri = "http://localhost:8080/sensor_data/room.json";
+////		SensorData result = this.restTemplate.getForEntity(url, responseType, uriVariables)  .getForObject(uri, SensorData.class);
+////
+////	    System.out.println(result);
 		return null;
 	}
 
+
+	public List<Long> getSensorIDListByNodeId(long nodeId) {
+		String url = "http://" + IOT_CONFIG_SEVER_IP + ":" + PORT + "/nodes/" + nodeId + "/sensors";
+	    ResponseEntity<List<Long>> response = restTemplate.exchange(
+	      url,
+	      HttpMethod.GET,
+	      null,
+	      new ParameterizedTypeReference<List<Long>>(){});
+	    List<Long> sensorIdList = response.getBody();
+	    
+		return sensorIdList;
+	}
+
+
+	public List<Long> getSensorIDListByClusterId(long clusterId) {
+		String url = "http://" + IOT_CONFIG_SEVER_IP + ":" + PORT + "/clusters/" + clusterId + "/sensors";
+	    ResponseEntity<List<Long>> response = restTemplate.exchange(
+	      url,
+	      HttpMethod.GET,
+	      null,
+	      new ParameterizedTypeReference<List<Long>>(){});
+	    List<Long> sensorIdList = response.getBody();
+	    
+		return sensorIdList;
+	}
+
+	public List<SensorData> testRestAPICall() {
+		String url = "http://" + IOT_CONFIG_SEVER_IP + ":" + PORT + "/sensor_data/testget";
+	    ResponseEntity<List<SensorData>> response = restTemplate.exchange(
+	      url,
+	      HttpMethod.GET,
+	      null,
+	      new ParameterizedTypeReference<List<SensorData>>(){});
+	    List<SensorData> sensorDataList = response.getBody();
+	    
+		return sensorDataList;
+	}
 }

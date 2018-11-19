@@ -1,0 +1,86 @@
+package com.wgc.green.manager;
+
+import java.util.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.wgc.green.entity.SensorData;
+import com.wgc.green.repository.SensorDataRepository;
+
+@Component
+public class SensorDataManager {
+	@Autowired
+	private SensorDataRepository sensorDataRepository;
+	
+	public List<SensorData> getSensorDataBySensorIdAndTime(long sensorId, Date startTime, Date endTime) {
+		if(sensorId < 0 || startTime == null || endTime == null || startTime.compareTo(endTime) > 0) { 
+			return null;
+		}
+		return sensorDataRepository.findBySensorIdAndTime(sensorId, startTime, endTime);
+	}
+	
+	public List<SensorData> getSensorDataByNodeIdAndTime(long nodeId, Date startTime, Date endTime) {
+		if(nodeId < 0 || startTime == null || endTime == null || startTime.compareTo(endTime) > 0) { 
+			return null;
+		}
+		return sensorDataRepository.findByNodeIdAndTime(nodeId, startTime, endTime);
+	}
+	
+	public List<SensorData> getSensorDataByClusterIdAndTime(long clusterId, Date startTime, Date endTime) {
+		if(clusterId < 0 || startTime == null || endTime == null || startTime.compareTo(endTime) > 0) { 
+			return null;
+		}
+		return sensorDataRepository.findByClusterIdAndTime(clusterId, startTime, endTime);
+	}
+
+
+	
+	public void addSensorData(List<SensorData> sensorDataList) {
+		System.out.println(sensorDataList);
+		sensorDataRepository.insert(sensorDataList);  
+	}
+
+	public void updateSensorData(List<SensorData> sensorDataList) {
+		// System.out.println("nodeId = " + sensorDataList.get(0).getNodeId());
+		List<SensorData> oldSensorDataList = new LinkedList<>();
+		for(SensorData sd : sensorDataList) {
+			Optional<SensorData> res = sensorDataRepository.findById( sd.getId());
+			SensorData oldOne = null;
+			if(res.isPresent()) {
+				oldOne = res.get();
+				if(sd.getSensorId() > 0) {
+					oldOne.setSensorId( sd.getSensorId());
+				}
+				if(sd.getData() != null) {
+					oldOne.setData( sd.getData());
+				}
+				if(sd.getDate() != null) {
+					oldOne.setDate( sd.getDate());
+				}
+				if(sd.getModel() != null) {
+					oldOne.setModel( sd.getModel());
+				}
+				if(sd.getUnit() != null) {
+					oldOne.setUnit( sd.getUnit());
+				}
+				if(sd.getType()() != null) {
+					oldOne.setType( sd.getType());
+				}
+				sensorDataRepository.save(arg0);
+			}
+		}
+		sensorDataRepository.saveAll(sensorDataList);   // save = upsert;  insert
+		
+	}
+
+	public void deleteSensorData(String id) {
+		sensorDataRepository.deleteById(id);
+	}
+
+	public List<SensorData> testGet() {
+		// TODO Auto-generated method stub
+		return sensorDataRepository.findAll();
+	}
+
+}
