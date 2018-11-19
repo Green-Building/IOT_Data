@@ -1,5 +1,0 @@
-package com.wgc.green.repository;
-
-public interface SensorDataRepository extends MongoRepository<SnesorData, String> {
-
-}

@@ -26,9 +26,6 @@ public class SensorDataController {
 	private SensorDataManager sdManager;
 	@Autowired
 	private RequestIotConfig reqIotConfig;
-	
-	@Autowired
-	private SensorDataRepository sensorDataRepository;
 
 	@CrossOrigin(origins = "*")
 	@GetMapping("/building/{id}")
@@ -74,6 +71,36 @@ public class SensorDataController {
 	}
 	
 	@CrossOrigin(origins = "*")
+	@GetMapping("/node/{id}")
+	public List<SensorData> getSensorDataByNodeId(@PathVariable ("id") long id, @RequestParam(value="startTime") Date startTime, @RequestParam(value="endTime") Date endTime) {
+		return sdManager.getSensorDataByNodeIdAndTime(id, startTime, endTime);
+	}
+	
+	@CrossOrigin(origins = "*")
+	@GetMapping("/cluster/{id}")
+	public List<SensorData> getSensorDataByClusterId(@PathVariable ("id") long id, @RequestParam(value="startTime") Date startTime, @RequestParam(value="endTime") Date endTime) {
+		return sdManager.getSensorDataByClusterIdAndTime(id, startTime, endTime);
+	}
+	
+	@CrossOrigin(origins = "*")
+	@PostMapping  
+	public void addSensorData(@RequestBody List<SensorData> sensorDataList) {		
+		sdManager.addSensorData(sensorDataList);
+	} 
+
+	@CrossOrigin(origins = "*")
+	@PutMapping
+	public void updateSensorData(@RequestBody List<SensorData> sensorDataList) {
+		sdManager.updateSensorData(sensorDataList);
+	}
+	
+	@CrossOrigin(origins = "*")
+	@DeleteMapping("/{id}")
+	public void deleteSensorData(@PathVariable ("id") String id ) {
+		sdManager.deleteSensorData(id);
+	}
+	
+	@CrossOrigin(origins = "*")
 	@GetMapping("/testget")
 	public List<SensorData> getSensorDataTest() {
 		return sdManager.testGet();
@@ -87,39 +114,26 @@ public class SensorDataController {
 		sd1.setDate(new Date("Sat Nov 17 00:00:00 PST 2018"));
 		sd1.setData("data1");
 		sd1.setSensorId(1);
+		sd1.setNodeId(2);
+		sd1.setClusterId(3);
 		
 		SensorData sd2 = new SensorData();
 		sd2.setDate(new Date("Sat Nov 17 00:00:01 PST 2018"));
 		sd2.setSensorId(1);
+		sd2.setNodeId(2);
+		sd2.setClusterId(3);
 		sd2.setData("data2");
+		
 		
 		SensorData sd3 = new SensorData();
 		sd3.setDate(new Date("Sat Nov 17 00:00:02 PST 2018"));
 		sd3.setSensorId(2);
-		
+		sd3.setNodeId(3);
+		sd3.setClusterId(3);
 		sensorDataList.add(sd1);
 		sensorDataList.add(sd2);
 		sensorDataList.add(sd3);
 		sdManager.addSensorData(sensorDataList);
 	}
-	
-	@CrossOrigin(origins = "*")
-	@PostMapping  
-	public void addSensorData(@RequestBody List<SensorData> sensorDataList) {		
-		sdManager.addSensorData(sensorDataList);
-	} 
-
-	@CrossOrigin(origins = "*")
-	@PutMapping
-	public void updateSensorData(@RequestBody SensorData sensorData) {
-		sdManager.updateSensorData(sensorData);
-	}
-	
-	@CrossOrigin(origins = "*")
-	@DeleteMapping("/{id}")
-	public void deleteSensorData(@PathVariable ("id") String id ) {
-		sdManager.deleteSensorData(id);
-	}
-	
 	
 }

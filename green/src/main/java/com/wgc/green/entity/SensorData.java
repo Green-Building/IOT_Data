@@ -1,6 +1,5 @@
 package com.wgc.green.entity;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
@@ -19,13 +18,10 @@ public class SensorData {
 	private String id;
 	@Indexed(direction = IndexDirection.ASCENDING)    // @Indexed(unique = true)
     private long sensorId;
-//	@Transient
-//  private long node_id;		   
-//  private long cluster_id;	
+//	@Transient	
+//  @Field("Model")
+//  @JsonProperty("unit")
     private String unit;
-    
-//    @Field("Model")
-//    @JsonProperty("model")
     private String model;
     private String seriesNum;
     private String data;
@@ -33,6 +29,16 @@ public class SensorData {
     private String type;
 	@Indexed(direction = IndexDirection.ASCENDING)
     private Date date;
+	
+	@Indexed(direction = IndexDirection.ASCENDING)
+	private long nodeId;		   
+	@Indexed(direction = IndexDirection.ASCENDING)
+	private long clusterId;
+	@Indexed(direction = IndexDirection.ASCENDING)
+	private long roomId;		   
+	@Indexed(direction = IndexDirection.ASCENDING)
+	private long floorId;
+	private long buildingId;		   
 
 	
 	public long getSensorId() {
@@ -58,23 +64,6 @@ public class SensorData {
 	public void setId(String id) {
 		this.id = id;
 	}
-
-	
-//	public long getNode_id() {
-//		return node_id;
-//	}
-//
-//	public void setNode_id(long node_id) {
-//		this.node_id = node_id;
-//	}
-//
-//	public long getCluster_id() {
-//		return cluster_id;
-//	}
-//
-//	public void setCluster_id(long cluster_id) {
-//		this.cluster_id = cluster_id;
-//	}
 
 	public String getModel() {
 		return model;
@@ -114,6 +103,47 @@ public class SensorData {
 
 	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+
+	
+	public long getNodeId() {
+		return nodeId;
+	}
+
+	public void setNodeId(long nodeId) {
+		this.nodeId = nodeId;
+	}
+
+	public long getClusterId() {
+		return clusterId;
+	}
+
+	public void setClusterId(long clusterId) {
+		this.clusterId = clusterId;
+	}
+
+	public long getRoomId() {
+		return roomId;
+	}
+
+	public void setRoomId(long roomId) {
+		this.roomId = roomId;
+	}
+
+	public long getFloorId() {
+		return floorId;
+	}
+
+	public void setFloorId(long floorId) {
+		this.floorId = floorId;
+	}
+
+	public long getBuildingId() {
+		return buildingId;
+	}
+
+	public void setBuildingId(long buildingId) {
+		this.buildingId = buildingId;
 	}
 		
 }

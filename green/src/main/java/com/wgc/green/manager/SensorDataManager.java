@@ -19,14 +19,30 @@ public class SensorDataManager {
 		}
 		return sensorDataRepository.findBySensorIdAndTime(sensorId, startTime, endTime);
 	}
+	
+	public List<SensorData> getSensorDataByNodeIdAndTime(long nodeId, Date startTime, Date endTime) {
+		if(nodeId < 0 || startTime == null || endTime == null || startTime.compareTo(endTime) > 0) { 
+			return null;
+		}
+		return sensorDataRepository.findByNodeIdAndTime(nodeId, startTime, endTime);
+	}
+	
+	public List<SensorData> getSensorDataByClusterIdAndTime(long clusterId, Date startTime, Date endTime) {
+		if(clusterId < 0 || startTime == null || endTime == null || startTime.compareTo(endTime) > 0) { 
+			return null;
+		}
+		return sensorDataRepository.findByClusterIdAndTime(clusterId, startTime, endTime);
+	}
 
+
+	
 	public void addSensorData(List<SensorData> sensorDataList) {
 		System.out.println(sensorDataList);
 		sensorDataRepository.insert(sensorDataList);  
 	}
 
-	public void updateSensorData(SensorData sensorData) {
-		sensorDataRepository.save(sensorData);   // save = upsert;  insert
+	public void updateSensorData(List<SensorData> sensorDataList) {
+		sensorDataRepository.saveAll(sensorDataList);   // save = upsert;  insert
 		
 	}
 
