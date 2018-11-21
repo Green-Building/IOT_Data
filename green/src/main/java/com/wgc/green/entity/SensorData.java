@@ -22,13 +22,13 @@ public class SensorData {
 //  @Field("Model")
 //  @JsonProperty("unit")
     private String unit;
-    private String model;
-    private String seriesNum;
     private Double data;
 	@Indexed(direction = IndexDirection.ASCENDING) 
     private String type;
 	@Indexed(direction = IndexDirection.ASCENDING)
     private Date date;
+//  private String modelNum;
+//  private String seriesNum;
 	
 	
 //	@Indexed(direction = IndexDirection.ASCENDING)
@@ -60,18 +60,7 @@ public class SensorData {
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
-	public String getModel() {
-		return model;
-	}
-	public void setModel(String model) {
-		this.model = model;
-	}
-	public String getSeriesNum() {
-		return seriesNum;
-	}
-	public void setSeriesNum(String seriesNum) {
-		this.seriesNum = seriesNum;
-	}
+
 	public Double getData() {
 		return data;
 	}

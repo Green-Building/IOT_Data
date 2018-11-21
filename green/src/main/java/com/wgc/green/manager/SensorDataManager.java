@@ -5,6 +5,7 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.wgc.green.entity.Location;
 import com.wgc.green.entity.SensorData;
 import com.wgc.green.repository.SensorDataRepository;
 
@@ -48,8 +49,16 @@ public class SensorDataManager {
 	}
 	
 	public void addSensorData(List<SensorData> sensorDataList) {
-		System.out.println(sensorDataList);
-		sensorDataRepository.insert(sensorDataList);  
+		Map<Long, Location> locMap = new HashMap<>();
+		for(SensorData sd : sensorDataList) {
+			Location loc = locMap.get(sd.getSensorId());
+			if(loc == null) {
+				loc = requestIotConfig.getLocationBySensorId(sd.getSensorId());
+				locMap.put(sd.getSensorId(), loc);
+			}
+//			sensorDataRepository.insertByLocation(sd, loc);  			
+			sensorDataRepository.insert(sd);  
+		}
 	}
 
 	public void updateSensorData(List<SensorData> sensorDataList) {
@@ -68,9 +77,7 @@ public class SensorDataManager {
 				if(sd.getDate() != null) {
 					oldOne.setDate( sd.getDate());
 				}
-				if(sd.getModel() != null) {
-					oldOne.setModel( sd.getModel());
-				}
+
 				if(sd.getUnit() != null) {
 					oldOne.setUnit( sd.getUnit());
 				}

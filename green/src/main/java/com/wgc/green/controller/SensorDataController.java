@@ -24,14 +24,11 @@ import com.wgc.green.repository.SensorDataRepository;
 public class SensorDataController {
 	@Autowired
 	private SensorDataManager sdManager;
-	@Autowired
-	private RequestIotConfig reqIotConfig;
 
 	@CrossOrigin(origins = "*")
 	@GetMapping("/building/{id}")
 	public List<SensorData> getSensorDataByBuildingId(@PathVariable ("id") int buildId) {
 		// dummy
-		List<Long> sensorIDList = reqIotConfig.getSensorIDListBy(buildId);
 		List<SensorData> sensorDataList = new LinkedList<>();
 		sensorDataList = new ArrayList<>();
 		SensorData sd = new SensorData();
@@ -44,7 +41,6 @@ public class SensorDataController {
 	@GetMapping("/floor/{id}")
 	public List<SensorData> getSensorDataByFloorId(@PathVariable ("id") int floorId) {
 		// dummy
-		List<Long> sensorIDList = reqIotConfig.getSensorIDListBy(floorId);
 		List<SensorData> sensorDataList = new LinkedList<>();
 		sensorDataList = new ArrayList<>();
 		SensorData sd = new SensorData();
@@ -56,11 +52,9 @@ public class SensorDataController {
 	@CrossOrigin(origins = "*")
 	@GetMapping("/room/{id}")
 	public List<SensorData> getSensorDataByRoomId(@PathVariable ("id") int roomId, @RequestParam(value="startTime") Date startTime, @RequestParam(value="endTime") Date endTime) {
+		// dummy
 		List<SensorData> sensorDataList = new LinkedList<>();
-		List<Long> sensorIdList = reqIotConfig.getSensorIDListBy(roomId);
-		for(Long sensorId : sensorIdList) {
-			sensorDataList.addAll( sdManager.getSensorDataBySensorIdAndTime(sensorId, startTime, endTime));
-		}		
+	
 		return sensorDataList;
 	}
 	

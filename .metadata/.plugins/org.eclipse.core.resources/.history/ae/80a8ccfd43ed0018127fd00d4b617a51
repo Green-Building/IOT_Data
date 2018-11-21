@@ -1,0 +1,12 @@
+package com.wgc.green.entity;
+
+public class Location {
+	
+	private long buildingId;
+	private long floorId;
+	private long roomId;
+	private long cluserId;
+	private long nodeId;
+	
+	
+}
