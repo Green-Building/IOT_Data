@@ -18,7 +18,7 @@ import com.wgc.green.entity.SensorData;
 @Repository
 public interface SensorDataRepository extends MongoRepository<SensorData, String> {
 
-    MongoClientURI uri  = new MongoClientURI("mongodb://admin1:admin1@ds127644.mlab.com:27644");
+    MongoClientURI uri  = new MongoClientURI("mongodb://admin1:admin1@ds127644.mlab.com:27644/greenbuilding_data");
     MongoClient client = new MongoClient(uri);
 	MongoTemplate mongoTemplate = new MongoTemplate(client, "greenbuilding_data");
 
