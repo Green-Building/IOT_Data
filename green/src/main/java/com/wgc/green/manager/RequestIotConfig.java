@@ -8,6 +8,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.wgc.green.entity.Location;
 import com.wgc.green.entity.SensorData;
@@ -15,12 +16,15 @@ import com.wgc.green.entity.SensorData;
 @Component
 public class RequestIotConfig {
     RestTemplate restTemplate = new RestTemplate();
-    private final String IOT_CONFIG_SEVER_IP = "127.0.0.1";
-    private final String PORT = "8080";
-     
+    @Value("${config.data.infra_manager.ip}")
+    private String IOT_CONFIG_SEVER_IP;
+    @Value("${config.data.infra_manager.port}")
+    private String PORT;
+
 	public Location getLocationBySensorId(long sensorId) {
 		Location loc = new Location();
-		String url = "http://" + IOT_CONFIG_SEVER_IP + ":" + PORT + "/sensors/" + sensorId;
+        String url = "http://" + IOT_CONFIG_SEVER_IP + ":" + PORT + "/sensors/" + sensorId;
+        System.out.println("url is >>>>"+url);
 		ResponseEntity<String> sensorResponse = this.restTemplate.getForEntity(url, String.class);
 		JSONObject sensorObj = new JSONObject(sensorResponse.getBody());
 		loc.setNodeId(sensorObj.getLong("node_id"));
@@ -30,7 +34,7 @@ public class RequestIotConfig {
 		ResponseEntity<String> nodeResponse = this.restTemplate.getForEntity(url, String.class);
 		JSONObject nodeObj = new JSONObject(nodeResponse.getBody());
 		loc.setRoomId(nodeObj.getLong("room_id"));
-		
+
 		url = "http://" + IOT_CONFIG_SEVER_IP + ":" + PORT + "/clusters/" + loc.getClusterId();
 		ResponseEntity<String> response = this.restTemplate.getForEntity(url, String.class);
 		JSONObject obj = new JSONObject(response.getBody());
@@ -49,7 +53,7 @@ public class RequestIotConfig {
 	      null,
 	      new ParameterizedTypeReference<List<Long>>(){});
 	    List<Long> sensorIdList = response.getBody();
-	    
+
 		return sensorIdList;
 	}
 
@@ -62,7 +66,7 @@ public class RequestIotConfig {
 	      null,
 	      new ParameterizedTypeReference<List<Long>>(){});
 	    List<Long> sensorIdList = response.getBody();
-	    
+
 		return sensorIdList;
 	}
 
@@ -74,7 +78,7 @@ public class RequestIotConfig {
 	      null,
 	      new ParameterizedTypeReference<List<SensorData>>(){});
 	    List<SensorData> sensorDataList = response.getBody();
-	    
+
 		return sensorDataList;
 	}
 }
