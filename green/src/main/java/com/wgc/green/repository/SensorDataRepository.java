@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -23,8 +25,10 @@ public interface SensorDataRepository extends MongoRepository<SensorData, String
 	MongoTemplate mongoTemplate = new MongoTemplate(client, "greenbuilding_data");
 
 	public default List<SensorData> findBySensorIdAndTime(long sensorId, Date startTime, Date endTime) {
-		Query query = new Query();
-		query.addCriteria(Criteria.where("sensorId").is(sensorId).and("date").lte(endTime).gte(startTime));
+        Query query = new Query();
+        Pageable pageableRequest = PageRequest.of(0, 1);
+        query.addCriteria(Criteria.where("sensorId").is(sensorId).and("date").lte(endTime).gte(startTime));
+        query.with(pageableRequest);
 		return mongoTemplate.find(query, SensorData.class);
 	}
 
