@@ -26,7 +26,7 @@ public interface SensorDataRepository extends MongoRepository<SensorData, String
 
 	public default List<SensorData> findBySensorIdAndTime(long sensorId, Date startTime, Date endTime) {
         Query query = new Query();
-        Pageable pageableRequest = PageRequest.of(0, 1);
+        Pageable pageableRequest = PageRequest.of(0, 100);
         query.addCriteria(Criteria.where("sensorId").is(sensorId).and("date").lte(endTime).gte(startTime));
         query.with(pageableRequest);
 		return mongoTemplate.find(query, SensorData.class);
