@@ -12,36 +12,36 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
-@Document(collection = "senseor_data")
+@Document(collection = "sensor_data")
 public class SensorData {
 	@Id
 	private String id;
 	@Indexed(direction = IndexDirection.ASCENDING)    // @Indexed(unique = true)
     private long sensorId;
-//	@Transient	
+//	@Transient
 //  @Field("Model")
 //  @JsonProperty("unit")
     private String unit;
     private Double data;
-	@Indexed(direction = IndexDirection.ASCENDING) 
+	@Indexed(direction = IndexDirection.ASCENDING)
     private String type;
 	@Indexed(direction = IndexDirection.ASCENDING)
     private Date date;
 //  private String modelNum;
 //  private String seriesNum;
-	
-	
+
+
 //	@Indexed(direction = IndexDirection.ASCENDING)
-//	private long nodeId;		   
+//	private long nodeId;
 //	@Indexed(direction = IndexDirection.ASCENDING)
 //	private long clusterId;
 //	@Indexed(direction = IndexDirection.ASCENDING)
-//	private long roomId;		   
+//	private long roomId;
 //	@Indexed(direction = IndexDirection.ASCENDING)
 //	private long floorId;
-//	private long buildingId;		
-	
-	
+//	private long buildingId;
+
+
 	public String getId() {
 		return id;
 	}
@@ -79,5 +79,5 @@ public class SensorData {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-		
+
 }

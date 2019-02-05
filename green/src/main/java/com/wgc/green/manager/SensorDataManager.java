@@ -15,31 +15,31 @@ public class SensorDataManager {
 	private SensorDataRepository sensorDataRepository;
 	@Autowired
 	private RequestIotConfig requestIotConfig;
-	
+
 	public List<SensorData> getSensorDataBySensorIdAndTime(long sensorId, Date startTime, Date endTime) {
-		if(sensorId < 0 || startTime == null || endTime == null || startTime.compareTo(endTime) > 0) { 
+		if(sensorId < 0 || startTime == null || endTime == null || startTime.compareTo(endTime) > 0) {
 			return null;
 		}
 		return sensorDataRepository.findBySensorIdAndTime(sensorId, startTime, endTime);
 	}
-	
+
 	public List<SensorData> getSensorDataByNodeIdAndTime(long nodeId, Date startTime, Date endTime) {
-		if(nodeId < 0 || startTime == null || endTime == null || startTime.compareTo(endTime) > 0) { 
+		if(nodeId < 0 || startTime == null || endTime == null || startTime.compareTo(endTime) > 0) {
 			return null;
 		}
 		List<SensorData> sensorDataList = new LinkedList<>();
 		List<Long> sensorIdList = requestIotConfig.getSensorIDListByNodeId(nodeId);
 		for(Long id : sensorIdList) {
 			sensorDataList.addAll( sensorDataRepository.findBySensorIdAndTime(id, startTime, endTime));
-			
+
 		}
 		return sensorDataList;
 	}
-	
+
 	public List<SensorData> getSensorDataByClusterIdAndTime(long clusterId, Date startTime, Date endTime) {
-		if(clusterId < 0 || startTime == null || endTime == null || startTime.compareTo(endTime) > 0) { 
+		if(clusterId < 0 || startTime == null || endTime == null || startTime.compareTo(endTime) > 0) {
 			return null;
-		}		
+		}
 		List<SensorData> sensorDataList = new LinkedList<>();
 		List<Long> sensorIdList = requestIotConfig.getSensorIDListByClusterId(clusterId);
 		for(Long id : sensorIdList) {
@@ -47,17 +47,18 @@ public class SensorDataManager {
 		}
 		return sensorDataList;
 	}
-	
+
 	public void addSensorData(List<SensorData> sensorDataList) {
 		Map<Long, Location> locMap = new HashMap<>();
 		for(SensorData sd : sensorDataList) {
-			Location loc = locMap.get(sd.getSensorId());
+            Location loc = locMap.get(sd.getSensorId());
+            System.out.println("loc is >>>"+loc);
 			if(loc == null) {
 				loc = requestIotConfig.getLocationBySensorId(sd.getSensorId());
 				locMap.put(sd.getSensorId(), loc);
 			}
-//			sensorDataRepository.insertByLocation(sd, loc);  			
-			sensorDataRepository.insert(sd);  
+//			sensorDataRepository.insertByLocation(sd, loc);
+			sensorDataRepository.insert(sd);
 		}
 	}
 
@@ -87,7 +88,7 @@ public class SensorDataManager {
 				sensorDataRepository.save(oldOne);  // save = upsert;  insert
 			}
 		}
-		
+
 	}
 
 	public void deleteSensorData(String id) {
@@ -98,7 +99,7 @@ public class SensorDataManager {
 		// TODO Auto-generated method stub
 		return sensorDataRepository.findAll();
 	}
-	
+
 	public List<SensorData> testIotConifgCall() {
 		// TODO Auto-generated method stub
 		return requestIotConfig.testRestAPICall();
